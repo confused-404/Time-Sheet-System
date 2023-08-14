@@ -1,8 +1,7 @@
 # timesheet accepts data in format of: [name, date, start time, end time, break time, total time]
 
 import os
-import time
-import datetime
+from pandas import read_csv
 from pathlib import Path
 import csv
 
@@ -10,6 +9,10 @@ def main():
 
     timeSheetPath = Path(__file__).parents[2] / "data" / "timeSheet.csv"
     tempFilePath = Path(__file__).parents[2] / "data" / "tempFile.csv"
+
+    df = read_csv(timeSheetPath)
+    df.columns = ["Name", "Date", "Start Time", "End Time", "Break Time", "Total Time"]
+    df.to_csv(timeSheetPath, index=False)
 
     while True:
 
