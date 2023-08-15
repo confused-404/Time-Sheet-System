@@ -51,6 +51,8 @@ def main():
 
         elif pathway == "edit":
 
+            # TODO: FUNDAMENTAL FLAW IS THAT IT ASKS FOR DATE, BUT THERE CAN BE MULTIPLE ENTRIES FOR A DATE
+
             with open(timeSheetPath, "r") as file:
                 editReader = csv.reader(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 data = list(editReader)
@@ -61,9 +63,24 @@ def main():
 
             date = input("What is the date of the entry you want to edit? (mm/dd/yyyy): ")
 
+            entries = []
+
             for line in data:
                 if line[1] == date:
-                    entry = line
+                    entries.append(line)
+
+            if len(entries) > 1:
+                print("There are multiple entries for this date. Please choose one of the following: ")
+                for entry in entries:
+                    print(entry)
+
+            which_entry = input("What is the start time of the entry you want to edit? (hh:mm): ")
+            entry = []
+
+            for e in entries:
+                if e[2] == which_entry:
+                    entry = e
+            
 
             start_time = input("What time did you start? (hh:mm): ")
             end_time = input("What time did you end? (hh:mm): ")
@@ -72,6 +89,8 @@ def main():
             t_time = (int(end_time.split(":")[0]) - int(start_time.split(":")[0]) - int(break_time.split(":")[0])) * 60 + (int(end_time.split(":")[1]) - int(start_time.split(":")[1]) - int(break_time.split(":")[1]))
             hrs, mins = divmod(t_time, 60)
             total_time = str(hrs) + ":" + str(mins)
+
+
 
             new_entry = [name, date, start_time, end_time, break_time, total_time]
 
@@ -139,6 +158,9 @@ def main():
 
             hrs, mins = divmod(total_time, 60)
             print("Total time worked: " + str(hrs) + ":" + str(mins))
+
+        else:
+            print("Invalid input. Please try again.")
 
 if __name__ == "__main__":
     main() 
