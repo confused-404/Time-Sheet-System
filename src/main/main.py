@@ -18,7 +18,7 @@ def main():
 
         # learn what user wants to do (add, edit, delete, view, exit)
 
-        pathway = input("What would you like to do? (add, edit, delete, view, exit): ").lower()
+        pathway = input("What would you like to do? (add, edit, delete, view, sum, exit): ").lower()
 
         # if exit, exit
 
@@ -125,6 +125,20 @@ def main():
             for line in data:
                 if line[0] == name:
                     print(line)
+
+        elif pathway == "sum":
+            with open(timeSheetPath, "r") as file:
+                sumReader = csv.reader(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                data = list(sumReader)
+
+            total_time = 0
+
+            for line in data:
+                if line[0] == name:
+                    total_time += int(line[5].split(":")[0]) * 60 + int(line[5].split(":")[1])
+
+            hrs, mins = divmod(total_time, 60)
+            print("Total time worked: " + str(hrs) + ":" + str(mins))
 
 if __name__ == "__main__":
     main() 
