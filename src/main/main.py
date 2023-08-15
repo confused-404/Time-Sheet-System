@@ -38,6 +38,14 @@ def main():
             # calculate total time
             t_time = (int(end_time.split(":")[0]) - int(start_time.split(":")[0]) - int(break_time.split(":")[0])) * 60 + (int(end_time.split(":")[1]) - int(start_time.split(":")[1]) - int(break_time.split(":")[1]))
             hrs, mins = divmod(t_time, 60)
+            if t_time <= 60:
+                t_time = 60
+            elif hrs >= 1:
+                if mins < 30:
+                    mins = 0
+                elif mins >= 30:
+                    mins = 0
+                    hrs += 1
             total_time = str(hrs) + ":" + str(mins)
 
             # write data to file
@@ -88,6 +96,14 @@ def main():
             # calculate total time
             t_time = (int(end_time.split(":")[0]) - int(start_time.split(":")[0]) - int(break_time.split(":")[0])) * 60 + (int(end_time.split(":")[1]) - int(start_time.split(":")[1]) - int(break_time.split(":")[1]))
             hrs, mins = divmod(t_time, 60)
+            if t_time <= 60:
+                t_time = 60
+            elif hrs >= 1:
+                if mins < 30:
+                    mins = 0
+                elif mins >= 30:
+                    mins = 0
+                    hrs += 1
             total_time = str(hrs) + ":" + str(mins)
 
 
