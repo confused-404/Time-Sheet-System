@@ -41,9 +41,7 @@ def main():
             if t_time <= 60:
                 t_time = 60
             elif hrs >= 1:
-                if mins < 30:
-                    mins = 0
-                elif mins >= 30:
+                if mins >= 30:
                     mins = 0
                     hrs += 1
             total_time = str(hrs) + ":" + str(mins)
@@ -99,9 +97,7 @@ def main():
             if t_time <= 60:
                 t_time = 60
             elif hrs >= 1:
-                if mins < 30:
-                    mins = 0
-                elif mins >= 30:
+                if mins >= 30:
                     mins = 0
                     hrs += 1
             total_time = str(hrs) + ":" + str(mins)
